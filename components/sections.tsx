@@ -14,10 +14,6 @@ import { Reveal } from "./reveal";
 import { SITE, NAV } from "@/config/site";
 import {
     services,
-    specialties,
-    internalMedicineTopics,
-    ehrSystems,
-    clearinghouses,
     payors,
     onboarding,
     resources,
@@ -162,70 +158,6 @@ export function Services() {
             </h3>
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 {rcm.map(card)}
-            </div>
-        </Section>
-    );
-}
-
-export function Specialties() {
-    return (
-        <Section id="specialties">
-            <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr]">
-                <Head
-                    eyebrow="Specialties"
-                    title="Medical Billing Expertise Across Multiple Specialties."
-                >
-                    Our primary focus is US Internal Medicine billing, with
-                    support for a broad range of medical specialties. Our
-                    services are designed to help practices streamline billing
-                    workflows, improve claim accuracy, and manage revenue cycle
-                    operations.
-                </Head>
-
-                <Reveal>
-                    <Card className="specialty-card relative overflow-hidden border-brand/30 bg-gradient-to-br from-white via-white to-aqua/60 p-6 sm:p-8">
-                        <div className="mb-6 flex flex-wrap gap-2">
-                            {specialties.map((specialty) => (
-                                <Pill
-                                    key={specialty.name}
-                                    tone={specialty.primary ? "blue" : "gray"}
-                                >
-                                    {specialty.name}
-                                    {specialty.primary ? " · Primary" : ""}
-                                </Pill>
-                            ))}
-                        </div>
-
-                        <div className="rounded-2xl border border-brand/15 bg-white/80 p-5 sm:p-6">
-                            <p className="text-sm font-semibold text-muted">
-                                Internal Medicine Billing Focus
-                            </p>
-
-                            <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-                                {internalMedicineTopics.map((topic, i) => (
-                                    <li
-                                        key={topic}
-                                        className="specialty-topic flex gap-2 text-[15px]"
-                                        style={{
-                                            animationDelay: `${i * 65}ms`,
-                                        }}
-                                    >
-                                        <Check
-                                            className="mt-1 size-4 shrink-0 text-mint"
-                                            aria-hidden="true"
-                                        />
-                                        <span>{topic}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        <p className="mt-5 text-xs leading-5 text-muted">
-                            Specialty coverage and billing workflows should be
-                            confirmed based on your practice requirements.
-                        </p>
-                    </Card>
-                </Reveal>
             </div>
         </Section>
     );
@@ -742,6 +674,7 @@ const specialties = [
     "ISV & RCM PARTNERS",
     "DME",
 ];
+
 export function HeroMarquee() {
     return (
         <div
@@ -778,4 +711,5 @@ export function HeroMarquee() {
         </div>
     );
 }
+
 export { DemoBadge };

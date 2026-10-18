@@ -7,9 +7,9 @@ import {
     Clock,
     ClipboardCheck,
 } from "lucide-react";
-import { HeroMarquee } from "./sections";
 
 import { Btn, Pill } from "./ui";
+import { HeroMarquee } from "./sections";
 
 const stages = [
     { title: "Review", tone: "mint", status: "Checked" },
