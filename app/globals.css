@@ -1,0 +1,2790 @@
+@import "tailwindcss";
+
+/* ========================================
+   1. DESIGN SYSTEM â€” TAILWIND CSS V4
+======================================== */
+
+@theme {
+    /* Brand */
+    --color-navy: #0c172a;
+    --color-brand: #2f6bff;
+    --color-brand-hover: #2457df;
+    --color-mint: #27c2ae;
+    --color-aqua: #ddf8f2;
+
+    /* Surfaces */
+    --color-canvas: #f7fafc;
+    --color-surface: #ffffff;
+    --color-surface-soft: #f0f5fa;
+
+    /* Text */
+    --color-muted: #5b667a;
+    --color-subtle: #8894a7;
+
+    /* Borders */
+    --color-line: #e3eaf1;
+    --color-line-strong: #cbd7e5;
+
+    /* Typography */
+    --font-sans:
+        ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px rgb(12 23 42 / 5%);
+    --shadow-card: 0 12px 36px rgb(12 23 42 / 7%);
+    --shadow-float: 0 20px 60px rgb(12 23 42 / 12%);
+
+    /* Radius */
+    --radius-card: 1.25rem;
+    --radius-panel: 1.75rem;
+}
+
+/* ========================================
+   2. ROOT VARIABLES & RESET
+======================================== */
+
+:root {
+    color-scheme: light;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+
+    /* Keep synchronized with the fixed Header height. */
+    --header-height: 4.5rem;
+    --anchor-gap: 0.75rem;
+    --anchor-offset: calc(var(--header-height) + var(--anchor-gap));
+
+    /* Reusable layout variables */
+    --page-gutter: clamp(1rem, 4vw, 3rem);
+    --section-space: clamp(4rem, 8vw, 7.5rem);
+
+    /* Motion */
+    --transition-fast: 180ms ease;
+    --transition-base: 280ms ease;
+    --transition-smooth: 650ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* ========================================
+   3. DOCUMENT & SCROLLING
+======================================== */
+
+html {
+    scroll-behavior: smooth;
+
+    /*
+     * One consistent offset for all fragment links.
+     * Includes the fixed navbar plus a little breathing room.
+     */
+    scroll-padding-top: var(--anchor-offset);
+
+    scrollbar-gutter: stable;
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0;
+
+    overflow-x: hidden;
+    overflow-x: clip;
+
+    background-color: var(--color-canvas);
+    color: var(--color-navy);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+::selection {
+    background-color: var(--color-aqua);
+    color: var(--color-navy);
+}
+
+/* ========================================
+   4. BASE ELEMENTS
+======================================== */
+
+img,
+picture,
+video {
+    display: block;
+    max-width: 100%;
+}
+
+img {
+    height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    color: inherit;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    text-underline-offset: 0.2em;
+}
+
+a:not([class]) {
+    text-decoration: underline;
+    text-decoration-color: var(--color-line-strong);
+    transition: color var(--transition-fast);
+}
+
+a:not([class]):hover {
+    color: var(--color-brand);
+}
+
+button,
+a,
+input,
+textarea,
+select {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ========================================
+   5. ACCESSIBILITY & FOCUS
+======================================== */
+
+/* Preserve visible focus for keyboard navigation. */
+:focus-visible {
+    outline: 3px solid var(--color-brand);
+    outline-offset: 4px;
+}
+
+/* Avoid mouse-only focus rings without disabling
+   keyboard focus indicators. */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ========================================
+   6. REUSABLE LAYOUT UTILITIES
+======================================== */
+
+.section-space {
+    padding-block: var(--section-space);
+}
+
+.page-gutter {
+    padding-inline: var(--page-gutter);
+}
+
+/* ========================================
+   7. SURFACES & DEPTH
+======================================== */
+
+.surface-card {
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-soft);
+}
+
+.soft-shadow {
+    box-shadow: var(--shadow-card);
+}
+
+.glass-panel {
+    border: 1px solid rgb(255 255 255 / 65%);
+    background: rgb(255 255 255 / 75%);
+
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+}
+
+/* ========================================
+   8. BRAND VISUAL EFFECTS
+======================================== */
+
+.text-gradient {
+    background: linear-gradient(
+        120deg,
+        var(--color-brand) 0%,
+        var(--color-mint) 100%
+    );
+
+    background-clip: text;
+    color: transparent;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.gridbg {
+    background-image: radial-gradient(
+        rgb(203 216 230 / 85%) 1px,
+        transparent 1px
+    );
+    background-size: 22px 22px;
+}
+
+.gridbg-soft {
+    background-image: radial-gradient(
+        rgb(203 216 230 / 55%) 1px,
+        transparent 1px
+    );
+    background-size: 28px 28px;
+}
+
+/* ========================================
+   9. HOVER & MICRO-INTERACTIONS
+======================================== */
+
+.hover-lift {
+    transition:
+        transform var(--transition-base),
+        box-shadow var(--transition-base),
+        border-color var(--transition-base);
+}
+
+.interactive {
+    transition:
+        opacity var(--transition-fast),
+        background-color var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast);
+}
+
+.interactive:active {
+    transform: scale(0.98);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .hover-lift:hover {
+        transform: translateY(-5px);
+        border-color: var(--color-line-strong);
+        box-shadow: var(--shadow-card);
+    }
+
+    .hover-brand:hover {
+        color: var(--color-brand);
+    }
+}
+
+/* ========================================
+   10. SCROLL REVEAL ANIMATIONS
+======================================== */
+
+/*
+ * Progressive enhancement:
+ * reveal animations only activate when the HTML
+ * element has the "js" class.
+ *
+ * Without that class, the content remains visible.
+ */
+
+.js .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+
+    transition:
+        opacity var(--transition-smooth),
+        transform var(--transition-smooth);
+}
+
+.js .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Optional stagger utilities */
+
+.reveal-delay-1 {
+    transition-delay: 100ms !important;
+}
+
+.reveal-delay-2 {
+    transition-delay: 200ms !important;
+}
+
+.reveal-delay-3 {
+    transition-delay: 300ms !important;
+}
+
+.reveal-delay-4 {
+    transition-delay: 400ms !important;
+}
+
+/* ========================================
+   11. SVG FLOW & DECORATIVE ANIMATIONS
+======================================== */
+
+@keyframes floaty {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: -24;
+    }
+}
+
+@keyframes soft-pulse {
+    0%,
+    100% {
+        opacity: 0.65;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.04);
+    }
+}
+
+.floaty {
+    animation: floaty 7s ease-in-out infinite;
+}
+
+.floaty-slow {
+    animation: floaty 10s ease-in-out infinite;
+}
+
+.flow {
+    stroke-dasharray: 6 6;
+    animation: dash 1.6s linear infinite;
+}
+
+.soft-pulse {
+    animation: soft-pulse 3s ease-in-out infinite;
+}
+
+/* ========================================
+   12. SCROLLBARS
+======================================== */
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-line-strong) transparent;
+}
+
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    border: 2px solid transparent;
+    border-radius: 999px;
+    background-color: var(--color-line-strong);
+    background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-subtle);
+}
+
+/* ========================================
+   13. RESPONSIVE OPTIMIZATION
+======================================== */
+
+@media (max-width: 640px) {
+    .glass-panel {
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+    }
+}
+
+/* Performance section animations */
+
+@keyframes performance-draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes performance-area-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes performance-dot-in {
+    0% {
+        opacity: 0;
+        transform: scale(0.35);
+    }
+
+    70% {
+        opacity: 1;
+        transform: scale(1.18);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes performance-shimmer {
+    from {
+        transform: translateX(-140%) skewX(-16deg);
+    }
+
+    to {
+        transform: translateX(240%) skewX(-16deg);
+    }
+}
+
+/* Scroll reveal */
+.performance-animate {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0) scale(0.99);
+    transition:
+        opacity 680ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 680ms cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 300ms ease,
+        box-shadow 300ms ease,
+        background-color 300ms ease;
+    will-change: opacity, transform;
+}
+
+.performance-animate.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    will-change: auto;
+}
+
+/* Staggered KPI card entrance */
+.performance-delay-0 {
+    transition-delay: 0ms;
+}
+
+.performance-delay-1 {
+    transition-delay: 90ms;
+}
+
+.performance-delay-2 {
+    transition-delay: 180ms;
+}
+
+.performance-delay-3 {
+    transition-delay: 270ms;
+}
+
+/* Lift cards slightly on hover */
+.performance-animate.is-visible.performance-sheen:hover {
+    transform: translate3d(0, -2px, 0);
+}
+
+/* Analytics chart */
+.performance-chart-line {
+    stroke-dasharray: 600;
+    stroke-dashoffset: 600;
+}
+
+.performance-chart-area {
+    opacity: 0;
+}
+
+.performance-chart-dot {
+    opacity: 0;
+}
+
+.performance-chart.is-visible .performance-chart-line {
+    animation: performance-draw 1.45s cubic-bezier(0.22, 1, 0.36, 1) 120ms
+        forwards;
+}
+
+.performance-chart.is-visible .performance-chart-area {
+    animation: performance-area-in 900ms ease-out 180ms forwards;
+}
+
+.performance-chart.is-visible .performance-chart-dot {
+    animation: performance-dot-in 460ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Card shimmer effect */
+.performance-sheen {
+    position: relative;
+    isolation: isolate;
+}
+
+.performance-sheen::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 -40%;
+    width: 28%;
+    pointer-events: none;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgb(255 255 255 / 30%),
+        transparent
+    );
+    opacity: 0;
+}
+
+.performance-sheen:hover::after {
+    opacity: 1;
+    animation: performance-shimmer 900ms ease-out;
+}
+/* AI-assisted billing section animations */
+
+@keyframes ai-orb-drift {
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate3d(-12px, 10px, 0) scale(1.08);
+    }
+}
+
+@keyframes ai-icon-breathe {
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgb(39 194 174 / 0%);
+    }
+
+    50% {
+        box-shadow: 0 0 0 7px rgb(39 194 174 / 7%);
+    }
+}
+
+@keyframes ai-status-pulse {
+    0%,
+    100% {
+        opacity: 1;
+        box-shadow: 0 0 0 0 rgb(252 211 77 / 28%);
+    }
+
+    50% {
+        opacity: 0.7;
+        box-shadow: 0 0 0 5px rgb(252 211 77 / 0%);
+    }
+}
+
+@keyframes ai-progress-shine {
+    from {
+        transform: translateX(-140%);
+    }
+
+    to {
+        transform: translateX(240%);
+    }
+}
+
+@keyframes ai-stage-enter {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 8px, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes ai-current-ring {
+    0%,
+    100% {
+        box-shadow:
+            inset 0 0 0 1px rgb(39 194 174 / 5%),
+            0 0 0 0 rgb(39 194 174 / 0%);
+    }
+
+    50% {
+        box-shadow:
+            inset 0 0 0 1px rgb(39 194 174 / 14%),
+            0 0 0 4px rgb(39 194 174 / 5%);
+    }
+}
+
+@keyframes ai-copy-in {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes ai-button-sheen {
+    from {
+        transform: translateX(-160%) skewX(-18deg);
+    }
+
+    to {
+        transform: translateX(260%) skewX(-18deg);
+    }
+}
+
+@keyframes ai-stat-enter {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scroll-triggered reveal */
+.ai-reveal {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0) scale(0.99);
+    transition:
+        opacity 720ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 720ms cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 300ms ease,
+        background-color 300ms ease,
+        box-shadow 300ms ease;
+    will-change: opacity, transform;
+}
+
+.ai-reveal.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    will-change: auto;
+}
+
+/* Staggered card reveals */
+.ai-reveal-delay-0 {
+    transition-delay: 0ms;
+}
+
+.ai-reveal-delay-1 {
+    transition-delay: 90ms;
+}
+
+.ai-reveal-delay-2 {
+    transition-delay: 180ms;
+}
+
+.ai-reveal-delay-3 {
+    transition-delay: 270ms;
+}
+
+/* Capability cards */
+.ai-capability-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+}
+
+.ai-capability-card::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    content: "";
+    opacity: 0;
+    background: radial-gradient(
+        circle at 0% 0%,
+        rgb(39 194 174 / 12%),
+        transparent 55%
+    );
+    transition: opacity 350ms ease;
+}
+
+.ai-capability-card:hover::before {
+    opacity: 1;
+}
+
+.ai-capability-icon {
+    transform-origin: center;
+    transition:
+        transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 300ms ease;
+}
+
+.ai-capability-card:hover .ai-capability-icon {
+    transform: translateY(-2px) rotate(-4deg) scale(1.06);
+    box-shadow: 0 0 0 6px rgb(39 194 174 / 6%);
+}
+
+/* Simulation dashboard */
+.ai-simulation-shell {
+    isolation: isolate;
+    transition:
+        border-color 400ms ease,
+        box-shadow 400ms ease,
+        background-color 400ms ease;
+}
+
+.ai-simulation-shell:hover {
+    border-color: rgb(255 255 255 / 16%);
+    box-shadow:
+        0 28px 80px -38px rgb(0 0 0 / 82%),
+        0 0 35px rgb(47 107 255 / 5%);
+}
+
+/* Floating background glows */
+.ai-orb {
+    animation: ai-orb-drift 9s ease-in-out infinite;
+}
+
+.ai-orb-mint {
+    animation-delay: -4.5s;
+}
+
+/* AI icon */
+.ai-bot-icon {
+    animation: ai-icon-breathe 3.2s ease-in-out infinite;
+    transition:
+        color 250ms ease,
+        background-color 250ms ease,
+        transform 250ms ease;
+}
+
+.ai-simulation-shell:hover .ai-bot-icon {
+    transform: rotate(-5deg) scale(1.04);
+}
+
+/* Simulated demo status indicator */
+.ai-demo-dot {
+    animation: ai-status-pulse 2s ease-in-out infinite;
+}
+
+.ai-demo-badge {
+    backdrop-filter: blur(8px);
+}
+
+/* Animated progress bar */
+.ai-progress-fill {
+    overflow: hidden;
+}
+
+.ai-progress-fill::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgb(255 255 255 / 35%),
+        transparent
+    );
+    animation: ai-progress-shine 2.2s ease-in-out infinite;
+}
+
+/* Workflow stage transitions */
+.ai-stage-item {
+    transition:
+        border-color 320ms ease,
+        background-color 320ms ease,
+        opacity 320ms ease,
+        box-shadow 320ms ease,
+        transform 320ms ease;
+}
+
+.ai-stage-current {
+    animation:
+        ai-stage-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both,
+        ai-current-ring 2.5s ease-in-out 420ms infinite;
+}
+
+.ai-stage-complete {
+    transform: translateX(1px);
+}
+
+.ai-stage-pending {
+    transform: translateX(0);
+}
+
+/* Stage descriptions and warning flags */
+.ai-stage-copy,
+.ai-stage-flag {
+    animation: ai-copy-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.ai-stage-flag {
+    animation-delay: 70ms;
+}
+
+/* Simulation buttons */
+.ai-primary-button,
+.ai-secondary-button {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.ai-primary-button::after {
+    position: absolute;
+    z-index: -1;
+    inset: 0 auto 0 -45%;
+    width: 35%;
+    content: "";
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgb(255 255 255 / 24%),
+        transparent
+    );
+    transform: translateX(-160%) skewX(-18deg);
+}
+
+.ai-primary-button:not(:disabled):hover::after {
+    animation: ai-button-sheen 850ms ease-out;
+}
+
+.ai-primary-button:not(:disabled):active {
+    transform: translateY(1px) scale(0.99);
+}
+
+.ai-secondary-button:active {
+    transform: scale(0.99);
+}
+
+/* Sample metrics panel */
+.ai-metrics-panel {
+    position: relative;
+    overflow: hidden;
+}
+
+.ai-metrics-panel::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    content: "";
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgb(252 211 77 / 50%),
+        transparent
+    );
+}
+
+/* Staggered metrics entrance */
+.ai-reveal.is-visible .ai-stat-item {
+    animation: ai-stat-enter 550ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.ai-reveal.is-visible .ai-stat-delay-0 {
+    animation-delay: 100ms;
+}
+
+.ai-reveal.is-visible .ai-stat-delay-1 {
+    animation-delay: 200ms;
+}
+
+.ai-reveal.is-visible .ai-stat-delay-2 {
+    animation-delay: 300ms;
+}
+
+/* Shared site-section animations */
+
+@keyframes site-fade-up {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 18px, 0) scale(0.99);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+@keyframes site-flow-dash {
+    to {
+        stroke-dashoffset: -112;
+    }
+}
+
+@keyframes site-map-draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes site-orb-float {
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate3d(-12px, 10px, 0) scale(1.06);
+    }
+}
+
+/* Metric cards */
+
+.site-metric-card {
+    animation: site-fade-up 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    transition:
+        background-color 260ms ease,
+        transform 300ms ease,
+        box-shadow 300ms ease;
+}
+
+.site-metric-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px -24px rgb(15 23 42 / 28%);
+}
+
+.site-metric-card dt {
+    transition: color 250ms ease;
+}
+
+.site-metric-card:hover dt {
+    color: #2f6bff;
+}
+
+/* Care checklist and workflow */
+
+.care-point,
+.care-flow-step {
+    animation: site-fade-up 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.care-flow-card {
+    transition:
+        border-color 300ms ease,
+        box-shadow 300ms ease,
+        transform 300ms ease;
+}
+
+.care-flow-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 22px 46px -32px rgb(15 23 42 / 25%);
+}
+
+.care-flow-step > span:first-child {
+    transition:
+        transform 250ms ease,
+        box-shadow 250ms ease;
+}
+
+.care-flow-step:hover > span:first-child {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 5px rgb(39 194 174 / 10%);
+}
+
+/* Service cards */
+
+.service-card {
+    animation: site-fade-up 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.service-icon {
+    transition:
+        transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 280ms ease;
+}
+
+.service-card:hover .service-icon {
+    transform: translateY(-2px) rotate(-5deg) scale(1.06);
+    box-shadow: 0 0 0 6px rgb(39 194 174 / 8%);
+}
+
+/* Specialties */
+
+.specialty-card {
+    isolation: isolate;
+    animation: site-fade-up 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    transition:
+        border-color 300ms ease,
+        box-shadow 300ms ease;
+}
+
+.specialty-card:hover {
+    border-color: rgb(47 107 255 / 38%);
+    box-shadow: 0 18px 45px -35px rgb(47 107 255 / 35%);
+}
+
+.specialty-topic {
+    animation: site-fade-up 550ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    transition:
+        color 240ms ease,
+        transform 240ms ease;
+}
+
+.specialty-topic:hover {
+    color: #0b6f62;
+    transform: translateX(3px);
+}
+
+/* Technology cards and animated connector */
+
+.technology-card {
+    animation: site-fade-up 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    transition:
+        border-color 300ms ease,
+        box-shadow 300ms ease,
+        transform 300ms ease;
+}
+
+.technology-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 45px -34px rgb(15 23 42 / 24%);
+}
+
+.technology-flow-line {
+    stroke-dasharray: 8 6;
+    animation: site-flow-dash 9s linear infinite;
+}
+
+.ehr-chip {
+    transition:
+        transform 250ms ease,
+        border-color 250ms ease,
+        background-color 250ms ease,
+        box-shadow 250ms ease;
+}
+
+.ehr-chip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px -15px rgb(15 23 42 / 35%);
+}
+
+/* Coverage chips and map */
+
+.payor-chip {
+    animation: site-fade-up 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    transition: transform 220ms ease;
+}
+
+.payor-chip:hover {
+    transform: translateY(-2px);
+}
+
+.coverage-figure {
+    animation: site-fade-up 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    transition:
+        transform 300ms ease,
+        box-shadow 300ms ease;
+}
+
+.coverage-figure:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 22px 48px -34px rgb(15 23 42 / 22%);
+}
+
+.coverage-map-path {
+    stroke-dasharray: 760;
+    stroke-dashoffset: 760;
+    animation: site-map-draw 2.2s cubic-bezier(0.22, 1, 0.36, 1) 180ms forwards;
+}
+
+/* Testimonials */
+
+.testimonial-card {
+    animation: site-fade-up 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    transition:
+        transform 300ms ease,
+        border-color 300ms ease,
+        box-shadow 300ms ease;
+}
+
+.testimonial-card:nth-child(2) {
+    animation-delay: 100ms;
+}
+
+.testimonial-card:nth-child(3) {
+    animation-delay: 200ms;
+}
+
+.testimonial-quote {
+    transform-origin: left center;
+    transition: transform 260ms ease;
+}
+
+.testimonial-card:hover .testimonial-quote {
+    transform: rotate(-8deg) scale(1.12);
+}
+
+/* Onboarding */
+
+.onboarding-card {
+    transition:
+        transform 300ms ease,
+        border-color 300ms ease,
+        box-shadow 300ms ease;
+}
+
+.onboarding-number {
+    transition:
+        transform 300ms ease,
+        box-shadow 300ms ease;
+}
+
+.onboarding-card:hover .onboarding-number {
+    transform: rotate(-6deg) scale(1.08);
+    box-shadow: 0 8px 20px -10px rgb(47 107 255 / 70%);
+}
+
+/* Resource cards */
+
+.resource-card {
+    position: relative;
+    isolation: isolate;
+    transition:
+        transform 280ms ease,
+        border-color 280ms ease,
+        background-color 280ms ease,
+        box-shadow 280ms ease;
+}
+
+.resource-card::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    content: "";
+    border-radius: inherit;
+    background: radial-gradient(
+        circle at 0% 0%,
+        rgb(39 194 174 / 10%),
+        transparent 56%
+    );
+    opacity: 0;
+    transition: opacity 280ms ease;
+}
+
+.resource-card:hover::before {
+    opacity: 1;
+}
+
+/* Footer and contact card */
+
+.footer-orb,
+.contact-info-orb {
+    animation: site-orb-float 10s ease-in-out infinite;
+}
+
+.contact-info-orb {
+    animation-delay: -4s;
+}
+
+.footer-link {
+    position: relative;
+    display: inline-block;
+    text-underline-offset: 4px;
+}
+
+.footer-link::after {
+    position: absolute;
+    right: 0;
+    bottom: -2px;
+    left: 0;
+    height: 1px;
+    content: "";
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 230ms ease;
+}
+
+.footer-link:hover::after,
+.footer-link:focus-visible::after {
+    transform: scaleX(1);
+}
+
+.contact-info-card {
+    isolation: isolate;
+    transition:
+        transform 300ms ease,
+        box-shadow 300ms ease;
+}
+
+.contact-info-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 26px 55px -35px rgb(15 23 42 / 55%);
+}
+
+.contact-info-item {
+    animation: site-fade-up 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.contact-info-item:nth-child(1) {
+    animation-delay: 80ms;
+}
+
+.contact-info-item:nth-child(2) {
+    animation-delay: 150ms;
+}
+
+.contact-info-item:nth-child(3) {
+    animation-delay: 220ms;
+}
+
+/* Header entrance, navigation, CTA, and mobile menu animations */
+
+@keyframes header-drop-in {
+    from {
+        opacity: 0;
+        transform: translate3d(0, -10px, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes header-nav-enter {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes header-menu-open {
+    from {
+        opacity: 0;
+        transform: translate3d(0, -8px, 0) scale(0.99);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+@keyframes header-cta-sheen {
+    from {
+        transform: translateX(-160%) skewX(-18deg);
+    }
+
+    to {
+        transform: translateX(260%) skewX(-18deg);
+    }
+}
+
+/* Header entrance */
+.site-header-inner {
+    animation: header-drop-in 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.site-header {
+    transition:
+        background-color 300ms ease,
+        border-color 300ms ease,
+        box-shadow 300ms ease;
+}
+
+.site-header.is-solid {
+    box-shadow: 0 10px 30px -24px rgb(15 23 42 / 32%);
+}
+
+/* Brand logo and name */
+.header-brand-logo {
+    transition:
+        transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        filter 320ms ease;
+}
+
+.header-brand:hover .header-brand-logo {
+    transform: rotate(-5deg) scale(1.06);
+    filter: drop-shadow(0 4px 8px rgb(47 107 255 / 15%));
+}
+
+.header-brand-name {
+    transition: color 250ms ease;
+}
+
+.header-brand:hover .header-brand-name {
+    color: #2f6bff;
+}
+
+/* Desktop navigation underline */
+.desktop-nav-link {
+    position: relative;
+    isolation: isolate;
+    animation: header-nav-enter 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.desktop-nav-link::after {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    left: 10px;
+    height: 2px;
+    border-radius: 999px;
+    content: "";
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.desktop-nav-link:hover::after,
+.desktop-nav-link:focus-visible::after {
+    transform: scaleX(1);
+}
+
+/* CTA shimmer */
+.header-cta {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+}
+
+.header-cta::after {
+    position: absolute;
+    z-index: 0;
+    inset: 0 auto 0 -40%;
+    width: 28%;
+    content: "";
+    pointer-events: none;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgb(255 255 255 / 25%),
+        transparent
+    );
+    transform: translateX(-160%) skewX(-18deg);
+}
+
+.header-cta:hover::after {
+    animation: header-cta-sheen 850ms ease-out;
+}
+
+.header-cta > span,
+.header-cta > svg {
+    position: relative;
+    z-index: 1;
+}
+
+.header-cta > svg {
+    transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.header-cta:hover > svg {
+    transform: translateX(4px);
+}
+
+/* Mobile menu button */
+.header-menu-toggle {
+    transition:
+        transform 250ms ease,
+        border-color 250ms ease,
+        background-color 250ms ease,
+        color 250ms ease;
+}
+
+.header-menu-toggle:active {
+    transform: scale(0.95);
+}
+
+.header-menu-toggle svg {
+    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.header-menu-toggle.is-open svg {
+    transform: rotate(90deg);
+}
+
+/* Mobile dropdown */
+.mobile-nav-panel {
+    transform-origin: top center;
+    animation: header-menu-open 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.mobile-nav-link {
+    animation: header-nav-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.mobile-nav-arrow {
+    transition:
+        opacity 220ms ease,
+        transform 220ms ease;
+}
+
+.mobile-nav-link:hover .mobile-nav-arrow,
+.mobile-nav-link:focus-visible .mobile-nav-arrow {
+    opacity: 1;
+    transform: translateX(3px);
+}
+
+.mobile-nav-cta {
+    animation: header-nav-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
+}
+
+/* Revenue-cycle process section animations */
+
+@keyframes process-reveal-up {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0) scale(0.99);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+@keyframes process-active-bar-in {
+    from {
+        opacity: 0;
+        transform: scaleY(0.35);
+    }
+
+    to {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
+
+@keyframes process-detail-enter {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 8px, 0);
+        filter: blur(2px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+        filter: blur(0);
+    }
+}
+
+@keyframes process-progress-shine {
+    from {
+        transform: translateX(-140%);
+    }
+
+    to {
+        transform: translateX(240%);
+    }
+}
+
+@keyframes process-glow-drift {
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translate3d(-8px, 5px, 0);
+        opacity: 1;
+    }
+}
+
+/* Reveal elements as they enter the viewport */
+.process-reveal {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0) scale(0.99);
+    transition:
+        opacity 680ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 680ms cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 280ms ease,
+        box-shadow 280ms ease,
+        background-color 280ms ease;
+    will-change: opacity, transform;
+}
+
+.process-reveal.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    will-change: auto;
+}
+
+/* Stagger individual workflow cards */
+.process-step-button.is-visible {
+    animation: process-reveal-up 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.process-step-button {
+    isolation: isolate;
+}
+
+.process-step-button::after {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+    background: linear-gradient(
+        115deg,
+        transparent 15%,
+        rgb(47 107 255 / 4%) 50%,
+        transparent 85%
+    );
+    opacity: 0;
+    transition: opacity 260ms ease;
+}
+
+.process-step-button:hover::after {
+    opacity: 1;
+}
+
+.process-step-button.is-active {
+    box-shadow:
+        0 6px 22px -16px rgb(47 107 255 / 45%),
+        inset 0 0 0 1px rgb(47 107 255 / 5%);
+}
+
+/* Active step indicator */
+.process-active-indicator {
+    transform-origin: center;
+    animation: process-active-bar-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.process-step-number {
+    transition:
+        transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 280ms ease,
+        color 280ms ease,
+        border-color 280ms ease,
+        box-shadow 280ms ease;
+}
+
+.process-step-button:hover .process-step-number {
+    transform: translateY(-1px);
+}
+
+.process-step-button.is-active .process-step-number {
+    transform: scale(1.04);
+}
+
+.process-selected-icon {
+    animation: process-detail-enter 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.process-step-arrow {
+    transition:
+        transform 220ms ease,
+        color 220ms ease;
+}
+
+/* Workflow heading icon */
+.process-workflow-icon {
+    transition:
+        transform 260ms ease,
+        box-shadow 260ms ease;
+}
+
+.process-workflow-heading:hover .process-workflow-icon {
+    transform: rotate(-5deg) scale(1.05);
+    box-shadow: 0 0 0 5px rgb(39 194 174 / 8%);
+}
+
+/* Selected-step detail card */
+.process-detail-card {
+    transition:
+        border-color 300ms ease,
+        box-shadow 300ms ease,
+        transform 300ms ease;
+}
+
+.process-detail-card.is-visible:hover {
+    border-color: rgb(47 107 255 / 30%);
+    box-shadow: 0 24px 54px -38px rgb(15 23 42 / 25%);
+}
+
+.process-detail-glow {
+    animation: process-glow-drift 8s ease-in-out infinite;
+    transform-origin: center;
+    pointer-events: none;
+}
+
+.process-detail-icon {
+    transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.process-detail-card:hover .process-detail-icon {
+    transform: translateY(-2px) rotate(-4deg);
+}
+
+.process-detail-copy {
+    animation: process-detail-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Smooth progress changes and subtle shimmer */
+.process-progress-track {
+    isolation: isolate;
+}
+
+.process-progress-fill {
+    overflow: hidden;
+}
+
+.process-progress-fill::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgb(255 255 255 / 38%),
+        transparent
+    );
+    animation: process-progress-shine 2.4s ease-in-out infinite;
+}
+
+/* Previous and Next controls */
+.process-navigation-button {
+    transition:
+        transform 220ms ease,
+        background-color 220ms ease,
+        border-color 220ms ease,
+        box-shadow 220ms ease;
+}
+
+.process-navigation-button:not(:disabled):active {
+    transform: translateY(1px) scale(0.99);
+}
+
+.process-navigation-button:disabled {
+    box-shadow: none;
+}
+
+/* Contact form animations â€” CSS-only, safe across React re-renders */
+
+@keyframes contact-form-enter {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 18px, 0) scale(0.995);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+@keyframes contact-form-field-enter {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 12px, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes contact-form-icon-pop {
+    0% {
+        opacity: 0;
+        transform: scale(0.78) rotate(-7deg);
+    }
+
+    70% {
+        opacity: 1;
+        transform: scale(1.06) rotate(2deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+}
+
+@keyframes contact-form-message-in {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes contact-form-sheen {
+    from {
+        transform: translateX(-160%) skewX(-18deg);
+    }
+
+    to {
+        transform: translateX(260%) skewX(-18deg);
+    }
+}
+
+/* Main form entrance */
+.contact-form-shell {
+    animation: contact-form-enter 680ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    transition:
+        box-shadow 320ms ease,
+        border-color 320ms ease;
+}
+
+.contact-form-shell:focus-within {
+    box-shadow: 0 18px 48px -36px rgb(47 107 255 / 26%);
+}
+
+.contact-form-heading {
+    animation: contact-form-field-enter 600ms cubic-bezier(0.22, 1, 0.36, 1)
+        70ms both;
+}
+
+/* Staggered field entrance */
+.contact-form-fields > div:not(.contact-form-honeypot) {
+    animation: contact-form-field-enter 620ms cubic-bezier(0.22, 1, 0.36, 1)
+        both;
+}
+
+.contact-form-fields > div:nth-child(1) {
+    animation-delay: 100ms;
+}
+.contact-form-fields > div:nth-child(2) {
+    animation-delay: 150ms;
+}
+.contact-form-fields > div:nth-child(3) {
+    animation-delay: 200ms;
+}
+.contact-form-fields > div:nth-child(4) {
+    animation-delay: 250ms;
+}
+.contact-form-fields > div:nth-child(5) {
+    animation-delay: 300ms;
+}
+.contact-form-fields > div:nth-child(6) {
+    animation-delay: 350ms;
+}
+.contact-form-fields > div:nth-child(7) {
+    animation-delay: 400ms;
+}
+.contact-form-fields > div:nth-child(8) {
+    animation-delay: 450ms;
+}
+.contact-form-fields > div:nth-child(10) {
+    animation-delay: 500ms;
+}
+
+/* Focused field label */
+.contact-form-fields > div:focus-within > label {
+    color: #2f6bff;
+    transition: color 220ms ease;
+}
+
+/* Inputs and selects */
+.contact-form-shell input:not([type="checkbox"]):not([type="hidden"]),
+.contact-form-shell select,
+.contact-form-shell textarea {
+    transition:
+        border-color 220ms ease,
+        box-shadow 220ms ease,
+        background-color 220ms ease,
+        transform 220ms ease;
+}
+
+.contact-form-shell input:not([type="checkbox"]):not([type="hidden"]):focus,
+.contact-form-shell select:focus,
+.contact-form-shell textarea:focus {
+    transform: translateY(-1px);
+}
+
+.contact-form-shell input[type="checkbox"] {
+    transition: transform 180ms ease;
+}
+
+.contact-form-shell input[type="checkbox"]:active {
+    transform: scale(0.94);
+}
+
+/* Field validation messages */
+.contact-form-shell [id$="-error"] {
+    animation: contact-form-message-in 260ms ease-out both;
+}
+
+.contact-form-error-panel {
+    animation: contact-form-message-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Privacy reminder */
+.contact-form-fields p[id="message-help"] {
+    transition:
+        background-color 250ms ease,
+        border-color 250ms ease;
+}
+
+.contact-form-fields > div:focus-within p[id="message-help"] {
+    border-color: rgb(217 119 6 / 28%);
+}
+
+/* Submit button */
+.contact-form-submit-button {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+}
+
+.contact-form-submit-button::after {
+    position: absolute;
+    z-index: 0;
+    inset: 0 auto 0 -38%;
+    width: 28%;
+    content: "";
+    pointer-events: none;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgb(255 255 255 / 24%),
+        transparent
+    );
+    transform: translateX(-160%) skewX(-18deg);
+}
+
+.contact-form-submit-button:not(:disabled):hover::after {
+    animation: contact-form-sheen 850ms ease-out;
+}
+
+.contact-form-submit-button > svg {
+    transition: transform 240ms ease;
+}
+
+.contact-form-submit-button:not(:disabled):hover > svg {
+    transform: translateX(3px);
+}
+
+/* Success state */
+.contact-form-success {
+    animation: contact-form-enter 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.contact-form-success-icon {
+    animation: contact-form-icon-pop 520ms cubic-bezier(0.22, 1, 0.36, 1) 100ms
+        both;
+}
+
+.contact-form-success-note {
+    animation: contact-form-message-in 480ms cubic-bezier(0.22, 1, 0.36, 1)
+        180ms both;
+}
+
+/* Hero section: entrance, ambient background, workflow, and chart animations */
+
+@keyframes hero-enter-up {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 22px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes hero-enter-right {
+    from {
+        opacity: 0;
+        transform: translate3d(24px, 8px, 0) scale(0.99);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+@keyframes hero-grid-drift {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 36px 36px;
+    }
+}
+
+@keyframes hero-orb-float {
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+        transform: translate3d(-14px, 12px, 0) scale(1.05);
+    }
+}
+
+@keyframes hero-soft-pulse {
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgb(39 194 174 / 0%);
+        opacity: 1;
+    }
+    50% {
+        box-shadow: 0 0 0 6px rgb(39 194 174 / 12%);
+        opacity: 0.78;
+    }
+}
+
+@keyframes hero-stage-enter {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.985);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes hero-flow-dash {
+    to {
+        stroke-dashoffset: -72;
+    }
+}
+
+@keyframes hero-chart-draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes hero-chart-area-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.8;
+    }
+}
+
+@keyframes hero-chart-dot-pop {
+    0% {
+        opacity: 0;
+        transform: scale(0.35);
+    }
+    70% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes hero-floaty-drift {
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+    50% {
+        transform: translate3d(0, -7px, 0);
+    }
+}
+
+@keyframes hero-cta-sheen {
+    from {
+        transform: translateX(-160%) skewX(-18deg);
+    }
+    to {
+        transform: translateX(260%) skewX(-18deg);
+    }
+}
+
+/* Scoped dot-grid background */
+.hero-section .gridbg {
+    background-image: radial-gradient(rgb(22 38 96 / 18%) 1px, transparent 1px);
+    background-size: 18px 18px;
+    animation: hero-grid-drift 24s linear infinite;
+}
+
+/* Ambient background orbs */
+.hero-section .hero-orb,
+.hero-section .hero-orb-delayed {
+    animation: hero-orb-float 11s ease-in-out infinite;
+    will-change: transform;
+}
+
+.hero-section .hero-orb-delayed {
+    animation-delay: -5.5s;
+}
+
+/* Staggered copy and dashboard entrances */
+.hero-section .hero-enter {
+    animation: hero-enter-up 760ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-section .hero-enter-right {
+    animation: hero-enter-right 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-section .hero-delay-1 {
+    animation-delay: 80ms;
+}
+.hero-section .hero-delay-2 {
+    animation-delay: 160ms;
+}
+.hero-section .hero-delay-3 {
+    animation-delay: 240ms;
+}
+.hero-section .hero-delay-4 {
+    animation-delay: 320ms;
+}
+.hero-section .hero-delay-5 {
+    animation-delay: 400ms;
+}
+.hero-section .hero-delay-6 {
+    animation-delay: 480ms;
+}
+
+.hero-section .soft-pulse {
+    animation: hero-soft-pulse 2.8s ease-in-out infinite;
+}
+
+/* CTA interaction */
+.hero-section .hero-cta-primary,
+.hero-section .hero-cta-secondary {
+    transition:
+        transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 240ms ease;
+}
+
+.hero-section .hero-cta-primary:hover,
+.hero-section .hero-cta-secondary:hover {
+    transform: translateY(-2px);
+}
+
+.hero-section .hero-cta-primary svg {
+    transition: transform 240ms ease;
+}
+
+.hero-section .hero-cta-primary:hover svg {
+    transform: translateX(4px);
+}
+
+/* Dashboard entrance and hover */
+.hero-section .hero-dashboard {
+    transition:
+        box-shadow 350ms ease,
+        border-color 350ms ease,
+        transform 350ms ease;
+}
+
+.hero-section .hero-dashboard:hover {
+    box-shadow: 0 28px 70px -40px rgb(15 23 42 / 28%);
+    transform: translateY(-4px);
+}
+
+/* Workflow stage cards stagger in */
+.hero-section .hero-stage-card {
+    animation: hero-stage-enter 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    transition:
+        transform 250ms ease,
+        border-color 250ms ease,
+        box-shadow 250ms ease;
+}
+
+.hero-section .hero-stage-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px -20px rgb(47 107 255 / 45%);
+}
+
+/* Moving connector dash */
+.hero-section .hero-flow-line {
+    stroke-dasharray: 6 6;
+    animation: hero-flow-dash 7s linear infinite;
+}
+
+/* Illustrative chart draw-on */
+.hero-section .hero-chart-card {
+    animation: hero-enter-up 650ms cubic-bezier(0.22, 1, 0.36, 1) 360ms both;
+}
+
+.hero-section .hero-chart-area {
+    opacity: 0;
+    animation: hero-chart-area-in 1100ms ease-out 900ms forwards;
+}
+
+.hero-section .hero-chart-line {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: hero-chart-draw 1.9s cubic-bezier(0.22, 1, 0.36, 1) 550ms
+        forwards;
+}
+
+.hero-section .hero-chart-dot {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: hero-chart-dot-pop 420ms cubic-bezier(0.22, 1, 0.36, 1) 2.1s
+        forwards;
+}
+
+/* Floating callouts */
+.hero-section .hero-floaty {
+    animation: hero-floaty-drift 5.5s ease-in-out infinite;
+    transition:
+        box-shadow 260ms ease,
+        border-color 260ms ease;
+}
+
+.hero-section .hero-floaty:hover {
+    border-color: rgb(47 107 255 / 30%);
+    box-shadow: 0 18px 35px -25px rgb(15 23 42 / 30%);
+}
+
+/* FAQ section animations */
+
+@keyframes faq-enter-up {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 14px, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes faq-answer-enter {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Staggered FAQ row entrance */
+.faq-item {
+    animation: faq-enter-up 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Question hover and active states */
+.faq-question {
+    position: relative;
+    isolation: isolate;
+}
+
+.faq-question::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    content: "";
+    background: linear-gradient(100deg, rgb(47 107 255 / 4%), transparent 70%);
+    opacity: 0;
+    transition: opacity 260ms ease;
+}
+
+.faq-question:hover::before,
+.faq-question.is-open::before {
+    opacity: 1;
+}
+
+.faq-question > span:first-child {
+    transition:
+        color 240ms ease,
+        transform 240ms ease;
+}
+
+.faq-question:hover > span:first-child {
+    transform: translateX(2px);
+}
+
+/* Accordion expansion using grid rows */
+.faq-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    overflow: hidden;
+    transition:
+        grid-template-rows 360ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 240ms ease;
+}
+
+.faq-panel.is-open {
+    grid-template-rows: 1fr;
+    opacity: 1;
+}
+
+.faq-panel-inner {
+    min-height: 0;
+    overflow: hidden;
+}
+
+.faq-panel.is-open .faq-answer-content {
+    animation: faq-answer-enter 360ms cubic-bezier(0.22, 1, 0.36, 1) 60ms both;
+}
+
+/* Chevron */
+.faq-chevron {
+    transition:
+        transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+        color 220ms ease,
+        background-color 220ms ease,
+        border-color 220ms ease,
+        box-shadow 220ms ease;
+}
+
+.faq-question:hover .faq-chevron {
+    box-shadow: 0 4px 12px -8px rgb(47 107 255 / 45%);
+}
+
+/* Contact prompt */
+.faq-contact-prompt {
+    animation: faq-enter-up 650ms cubic-bezier(0.22, 1, 0.36, 1) 180ms both;
+    transition:
+        border-color 280ms ease,
+        box-shadow 280ms ease,
+        transform 280ms ease;
+}
+
+.faq-contact-prompt:hover {
+    border-color: rgb(47 107 255 / 24%);
+    box-shadow: 0 18px 42px -34px rgb(15 23 42 / 24%);
+}
+
+.faq-contact-icon {
+    transition:
+        transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 260ms ease;
+}
+
+.faq-contact-prompt:hover .faq-contact-icon {
+    transform: translateY(-2px) rotate(-4deg);
+    box-shadow: 0 0 0 5px rgb(39 194 174 / 8%);
+}
+
+.faq-contact-link {
+    transition:
+        transform 220ms ease,
+        color 220ms ease,
+        background-color 220ms ease,
+        border-color 220ms ease;
+}
+
+.faq-contact-link:hover {
+    transform: translateY(-1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    /* Accessibility: reduced-motion overrides */
+
+    /* Global motion reset and legacy reveal fallback */
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+
+    /*
+     * Never leave reveal content hidden for users
+     * who prefer reduced motion.
+     */
+
+    .js .reveal,
+    .js .reveal.in {
+        opacity: 1;
+        transform: none;
+    }
+
+    /* Performance analytics */
+
+    .performance-animate,
+    .performance-animate.is-visible {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+
+    .performance-chart-line {
+        stroke-dashoffset: 0 !important;
+        animation: none !important;
+    }
+
+    .performance-chart-area,
+    .performance-chart-dot {
+        opacity: 1 !important;
+        animation: none !important;
+    }
+
+    .performance-sheen:hover::after {
+        animation: none !important;
+    }
+
+    /* AI-assisted billing */
+
+    .ai-reveal,
+    .ai-reveal.is-visible {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        will-change: auto !important;
+    }
+
+    .ai-orb,
+    .ai-bot-icon,
+    .ai-demo-dot,
+    .ai-progress-fill::after,
+    .ai-primary-button::after,
+    .ai-stage-current,
+    .ai-stage-copy,
+    .ai-stage-flag,
+    .ai-reveal.is-visible .ai-stat-item {
+        animation: none !important;
+    }
+
+    .ai-stage-current {
+        box-shadow: inset 0 0 0 1px rgb(39 194 174 / 8%);
+    }
+
+    .ai-capability-icon {
+        transition: none !important;
+    }
+
+    /* Shared content sections */
+
+    .site-metric-card,
+    .care-point,
+    .care-flow-step,
+    .service-card,
+    .specialty-card,
+    .specialty-topic,
+    .technology-card,
+    .technology-flow-line,
+    .payor-chip,
+    .coverage-figure,
+    .coverage-map-path,
+    .testimonial-card,
+    .contact-info-item,
+    .footer-orb,
+    .contact-info-orb {
+        animation: none !important;
+    }
+
+    .site-metric-card,
+    .care-flow-card,
+    .technology-card,
+    .coverage-figure,
+    .testimonial-card,
+    .contact-info-card,
+    .service-icon,
+    .specialty-topic,
+    .ehr-chip,
+    .onboarding-number,
+    .resource-card,
+    .footer-link::after {
+        transition: none !important;
+    }
+
+    .site-metric-card:hover,
+    .care-flow-card:hover,
+    .care-flow-step:hover > span:first-child,
+    .service-card:hover .service-icon,
+    .specialty-topic:hover,
+    .technology-card:hover,
+    .ehr-chip:hover,
+    .payor-chip:hover,
+    .coverage-figure:hover,
+    .testimonial-card:hover .testimonial-quote,
+    .onboarding-card:hover .onboarding-number,
+    .contact-info-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Header and mobile navigation */
+
+    .site-header-inner,
+    .desktop-nav-link,
+    .mobile-nav-panel,
+    .mobile-nav-link,
+    .mobile-nav-cta,
+    .header-cta:hover::after {
+        animation: none !important;
+    }
+
+    .header-brand-logo,
+    .header-brand-name,
+    .desktop-nav-link::after,
+    .header-cta > svg,
+    .header-menu-toggle,
+    .header-menu-toggle svg,
+    .mobile-nav-arrow {
+        transition: none !important;
+    }
+
+    .header-brand:hover .header-brand-logo,
+    .header-menu-toggle:active,
+    .header-menu-toggle.is-open svg,
+    .header-cta:hover > svg,
+    .mobile-nav-link:hover .mobile-nav-arrow {
+        transform: none !important;
+    }
+
+    /* Revenue-cycle process */
+
+    .process-reveal,
+    .process-reveal.is-visible {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+        filter: none !important;
+        will-change: auto !important;
+    }
+
+    .process-active-indicator,
+    .process-selected-icon,
+    .process-detail-copy,
+    .process-detail-glow,
+    .process-progress-fill::after {
+        animation: none !important;
+    }
+
+    .process-step-button,
+    .process-step-number,
+    .process-workflow-icon,
+    .process-detail-card,
+    .process-detail-icon,
+    .process-navigation-button,
+    .process-step-arrow {
+        transition: none !important;
+    }
+
+    .process-step-button:hover .process-step-number,
+    .process-step-button.is-active .process-step-number,
+    .process-workflow-heading:hover .process-workflow-icon,
+    .process-detail-card:hover .process-detail-icon,
+    .process-navigation-button:not(:disabled):active {
+        transform: none !important;
+    }
+
+    /* Contact form */
+
+    .contact-form-shell,
+    .contact-form-heading,
+    .contact-form-fields > div:not(.contact-form-honeypot),
+    .contact-form-error-panel,
+    .contact-form-shell [id$="-error"],
+    .contact-form-success,
+    .contact-form-success-icon,
+    .contact-form-success-note,
+    .contact-form-submit-button:not(:disabled):hover::after {
+        animation: none !important;
+    }
+
+    .contact-form-shell,
+    .contact-form-shell input,
+    .contact-form-shell select,
+    .contact-form-shell textarea,
+    .contact-form-shell input[type="checkbox"],
+    .contact-form-submit-button > svg {
+        transition: none !important;
+    }
+
+    .contact-form-shell input:not([type="checkbox"]):not([type="hidden"]):focus,
+    .contact-form-shell select:focus,
+    .contact-form-shell textarea:focus,
+    .contact-form-shell input[type="checkbox"]:active,
+    .contact-form-submit-button:not(:disabled):hover > svg {
+        transform: none !important;
+    }
+
+    /* Hero section */
+
+    .hero-section .gridbg,
+    .hero-section .hero-orb,
+    .hero-section .hero-orb-delayed,
+    .hero-section .hero-enter,
+    .hero-section .hero-enter-right,
+    .hero-section .soft-pulse,
+    .hero-section .hero-stage-card,
+    .hero-section .hero-flow-line,
+    .hero-section .hero-chart-card,
+    .hero-section .hero-chart-area,
+    .hero-section .hero-chart-line,
+    .hero-section .hero-chart-dot,
+    .hero-section .hero-floaty {
+        animation: none !important;
+    }
+
+    .hero-section .hero-chart-area,
+    .hero-section .hero-chart-dot {
+        opacity: 1 !important;
+    }
+
+    .hero-section .hero-chart-line {
+        stroke-dashoffset: 0 !important;
+    }
+
+    .hero-section .hero-cta-primary,
+    .hero-section .hero-cta-secondary,
+    .hero-section .hero-cta-primary svg,
+    .hero-section .hero-stage-card,
+    .hero-section .hero-dashboard,
+    .hero-section .hero-floaty {
+        transition: none !important;
+    }
+
+    .hero-section .hero-cta-primary:hover,
+    .hero-section .hero-cta-secondary:hover,
+    .hero-section .hero-cta-primary:hover svg,
+    .hero-section .hero-stage-card:hover {
+        transform: none !important;
+    }
+
+    /* FAQ accordion */
+
+    .faq-item,
+    .faq-contact-prompt,
+    .faq-panel.is-open .faq-answer-content {
+        animation: none !important;
+    }
+
+    .faq-question,
+    .faq-question::before,
+    .faq-question > span:first-child,
+    .faq-chevron,
+    .faq-panel,
+    .faq-contact-prompt,
+    .faq-contact-icon,
+    .faq-contact-link {
+        transition: none !important;
+    }
+
+    .faq-question:hover > span:first-child,
+    .faq-contact-prompt:hover .faq-contact-icon,
+    .faq-contact-link:hover {
+        transform: none !important;
+    }
+}
+
+/* Technology logo carousel */
+
+.technology-marquee {
+    --logo-gap: 16px;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 4px 0 10px;
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 3%,
+        black 97%,
+        transparent
+    );
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 3%,
+        black 97%,
+        transparent
+    );
+}
+
+.technology-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: technology-marquee-scroll 32s linear infinite;
+    will-change: transform;
+}
+
+.technology-marquee-track.technology-marquee-reverse {
+    animation-direction: reverse;
+    animation-duration: 38s;
+}
+
+.technology-marquee-group {
+    display: flex;
+    flex-shrink: 0;
+    align-items: stretch;
+    gap: var(--logo-gap);
+    padding-right: var(--logo-gap);
+    list-style: none;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}
+
+.technology-logo-card {
+    display: flex;
+    width: 220px;
+    height: 92px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 24px;
+    overflow: hidden;
+    border: 1px solid #d7e1ea;
+    border-radius: 16px;
+    background: linear-gradient(145deg, #ffffff 0%, #e8eef5 100%);
+    transition:
+        border-color 200ms ease,
+        box-shadow 200ms ease,
+        transform 200ms ease;
+}
+
+.technology-logo-image {
+    display: block;
+    width: 100%;
+    height: 48px;
+    object-fit: contain;
+}
+
+/* Improve contrast for white or very light logos */
+.technology-logo-image[src*="nextgen"],
+.technology-logo-image[src*="brightree"],
+.technology-logo-image[src*="Harris"],
+.technology-logo-image[src*="availity"] {
+    background: #334155;
+    border-radius: 8px;
+    padding: 6px 10px;
+}
+
+.technology-logo-card:hover {
+    border-color: var(--color-brand, #2f6bff);
+    box-shadow: 0 8px 24px rgb(15 23 42 / 8%);
+    transform: translateY(-2px);
+}
+
+.technology-logo-fallback {
+    color: var(--color-navy, #0c172a);
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.technology-marquee:hover .technology-marquee-track,
+.technology-marquee:focus-within .technology-marquee-track {
+    animation-play-state: paused;
+}
+
+@keyframes technology-marquee-scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 640px) {
+    .technology-marquee {
+        --logo-gap: 12px;
+    }
+
+    .technology-logo-card {
+        width: 180px;
+        height: 80px;
+        padding: 16px 20px;
+        border-radius: 14px;
+    }
+
+    .technology-logo-image {
+        height: 42px;
+    }
+
+    .technology-marquee-track {
+        animation-duration: 26s;
+    }
+
+    .technology-marquee-track.technology-marquee-reverse {
+        animation-duration: 32s;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .technology-marquee-track,
+    .technology-marquee-track.technology-marquee-reverse {
+        animation: none;
+        transform: none;
+    }
+
+    .technology-marquee {
+        overflow-x: auto;
+        -webkit-mask-image: none;
+        mask-image: none;
+    }
+
+    .technology-marquee-track {
+        width: max-content;
+    }
+}
+
+.coverage-state-chip {
+    opacity: 0;
+    animation: coverage-state-enter 450ms ease-out forwards;
+    transition:
+        border-color 200ms ease,
+        background-color 200ms ease,
+        transform 200ms ease;
+}
+
+.coverage-state-chip:hover {
+    border-color: var(--color-brand, #2f6bff);
+    background-color: white;
+    transform: translateY(-2px);
+}
+
+@keyframes coverage-state-enter {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .coverage-state-chip {
+        opacity: 1;
+        animation: none;
+        transform: none;
+    }
+}
