@@ -658,12 +658,15 @@ export function ContactInfo() {
                 aria-hidden="true"
                 className="contact-info-orb pointer-events-none absolute -right-12 -top-12 size-40 rounded-full bg-brand/20 blur-3xl"
             />
+
             <h3 className="relative text-xl font-semibold tracking-tight">
                 {SITE.founder.name}
             </h3>
+
             <p className="relative text-slate-300">
                 {SITE.founder.role}, {SITE.name}
             </p>
+
             <ul className="relative mt-6 space-y-4 text-[15px] leading-relaxed">
                 <li className="contact-info-item flex gap-3">
                     <MapPin
@@ -672,6 +675,7 @@ export function ContactInfo() {
                     />
                     {SITE.location}
                 </li>
+
                 <li className="contact-info-item flex gap-3">
                     <Mail
                         className="mt-0.5 size-5 shrink-0 text-mint"
@@ -684,6 +688,7 @@ export function ContactInfo() {
                         {SITE.email}
                     </a>
                 </li>
+
                 {SITE.phones.map((p) => (
                     <li key={p.href} className="contact-info-item flex gap-3">
                         <Phone
@@ -698,7 +703,27 @@ export function ContactInfo() {
                         </a>
                     </li>
                 ))}
+
+                {/* WhatsApp */}
+                <li className="contact-info-item flex gap-3">
+                    <MessageCircle
+                        className="mt-0.5 size-5 shrink-0 text-mint"
+                        aria-hidden="true"
+                    />
+                    <a
+                        className="underline-offset-4 transition-colors hover:text-white hover:underline"
+                        href={`${SITE.whatsapp.href}?text=${encodeURIComponent(
+                            SITE.whatsapp.message,
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Contact us on WhatsApp"
+                    >
+                        WhatsApp: {SITE.whatsapp.display}
+                    </a>
+                </li>
             </ul>
+
             <p className="relative mt-6 border-t border-white/10 pt-5 text-sm leading-relaxed text-slate-300">
                 We’ll review the details you provide and follow up with a
                 suitable next step.

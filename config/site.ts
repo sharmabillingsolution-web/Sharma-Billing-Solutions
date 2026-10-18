@@ -3,14 +3,16 @@ import { testimonials } from "@/data/content";
 /** Central, owner-editable configuration. Confirm every figure with the client before launch. */
 export const SITE = {
     name: "Sharma Billing Solutions",
-    logoSrc: "/images/logo-placeholder.svg", // swap for the final logo
-    url: "https://sharmabillingsolutions.vercel.app",
+    logoSrc: "/images/logo-placeholder.svg",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
     title: "Sharma Billing Solutions | Internal Medicine Medical Billing",
     description:
         "Medical billing and revenue cycle management support for US Internal Medicine practices, including coding review, eligibility checks, denial management, A/R follow-up, and AI-assisted billing workflows.",
+
     founder: { name: "Bhawani Dutt", role: "Founder" },
     location: "Ludhiana, Punjab, India",
     email: "sharma.bhawanis7@gmail.com",
+
     phones: [
         {
             label: "India",
@@ -23,7 +25,18 @@ export const SITE = {
             href: "tel:+16264124362",
         },
     ],
+
+    // WhatsApp contact configuration
+    whatsapp: {
+        display: "+91 89505-25008",
+        number: "918950525008",
+        href: "https://wa.me/918950525008",
+        message:
+            "Hello Sharma Billing Solutions, I'd like to know more about your medical billing services.",
+    },
+
     copyright: "© 2026 Sharma Billing Solutions. All rights reserved.",
+
     /** Client-supplied figures — confirm before launch. */
     metrics: [
         {
@@ -47,10 +60,9 @@ export const SITE = {
             label: "Human-reviewed, AI-assisted workflows",
         },
     ],
+
     flags: {
-        /** Show illustrative sample dashboards/panels. Set false to hide them all. */
         DEMO_DATA: true,
-        /** Show proposed quality targets. Enable only once the client approves them. */
         SHOW_QUALITY_TARGETS: false,
     },
 };
