@@ -2788,3 +2788,33 @@ select {
         transform: none;
     }
 }
+/* Hero specialties marquee */
+.hero-marquee {
+    isolation: isolate;
+}
+
+.marquee-track {
+    animation: hero-marquee-scroll 38s linear infinite;
+    will-change: transform;
+}
+
+.hero-marquee:hover .marquee-track {
+    animation-play-state: paused;
+}
+
+@keyframes hero-marquee-scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+        animation: none;
+        will-change: auto;
+    }
+}

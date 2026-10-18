@@ -732,4 +732,50 @@ export function ContactInfo() {
         </div>
     );
 }
+
+const specialties = [
+    "ANESTHESIA",
+    "EYE & SPECIALTY CARE",
+    "RURAL & UNDERSERVED",
+    "AMBULATORY",
+    "MULTISPECIALTY",
+    "ISV & RCM PARTNERS",
+    "DME",
+];
+export function HeroMarquee() {
+    return (
+        <div
+            className="hero-marquee relative z-10 mt-16 overflow-hidden border-y border-white/10 bg-[#110d25] py-5 sm:mt-20 md:mt-24"
+            aria-label="Specialties and partners served"
+        >
+            <div className="marquee-track flex w-max items-center">
+                {Array.from({ length: 4 }).map((_, groupIndex) => (
+                    <div
+                        key={groupIndex}
+                        className="flex shrink-0 items-center"
+                        aria-hidden={groupIndex !== 0}
+                    >
+                        {specialties.map((specialty) => (
+                            <div
+                                key={specialty}
+                                className="flex shrink-0 items-center"
+                            >
+                                <span className="whitespace-nowrap px-7 text-sm font-bold tracking-wide text-white sm:px-10 sm:text-base md:text-lg">
+                                    {specialty}
+                                </span>
+
+                                <span
+                                    className="text-xs text-mint"
+                                    aria-hidden="true"
+                                >
+                                    ✦
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
 export { DemoBadge };

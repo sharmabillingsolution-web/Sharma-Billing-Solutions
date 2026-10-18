@@ -7,6 +7,7 @@ import {
     Clock,
     ClipboardCheck,
 } from "lucide-react";
+import { HeroMarquee } from "./sections";
 
 import { Btn, Pill } from "./ui";
 
@@ -350,6 +351,7 @@ export function Hero() {
                     </div>
                 </figure>
             </div>
+            <HeroMarquee />
         </section>
     );
 }
