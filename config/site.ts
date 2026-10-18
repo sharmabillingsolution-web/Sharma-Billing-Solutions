@@ -4,7 +4,7 @@ import { testimonials } from "@/data/content";
 export const SITE = {
     name: "Sharma Billing Solutions",
     logoSrc: "/images/logo-placeholder.svg", // swap for the final logo
-    url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+    url: "https://sharmabillingsolutions.vercel.app",
     title: "Sharma Billing Solutions | Internal Medicine Medical Billing",
     description:
         "Medical billing and revenue cycle management support for US Internal Medicine practices, including coding review, eligibility checks, denial management, A/R follow-up, and AI-assisted billing workflows.",
