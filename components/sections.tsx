@@ -7,6 +7,7 @@ import {
     Phone,
     MapPin,
     Quote,
+    MessageCircle,
 } from "lucide-react";
 import { Section, Head, Card, Pill, DemoBadge } from "./ui";
 import { Reveal } from "./reveal";
