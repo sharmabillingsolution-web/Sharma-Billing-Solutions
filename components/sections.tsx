@@ -666,13 +666,21 @@ export function ContactInfo() {
 }
 
 const specialties = [
-    "ANESTHESIA",
-    "EYE & SPECIALTY CARE",
-    "RURAL & UNDERSERVED",
-    "AMBULATORY",
-    "MULTISPECIALTY",
-    "ISV & RCM PARTNERS",
-    "DME",
+    "Internal Medicine",
+    "Family Medicine",
+    "Anesthesiology",
+    "Radiology",
+    "Pain Management",
+    "Physical Therapy",
+    "Chiropractic",
+    "Orthopedics",
+    "Podiatry",
+    "Pediatrics",
+    "Gastroenterology",
+    "Dermatology",
+    "Wound Care",
+    "Psychology",
+    "Behavioral Health",
 ];
 
 export function HeroMarquee() {
