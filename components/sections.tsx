@@ -328,34 +328,56 @@ export function Testimonials() {
 
     const activeTestimonial = stateTestimonials[activeIndex];
 
+    const goToPrevious = () => {
+        setActiveIndex(
+            (current) =>
+                (current - 1 + stateTestimonials.length) %
+                stateTestimonials.length,
+        );
+    };
+
+    const goToNext = () => {
+        setActiveIndex((current) => (current + 1) % stateTestimonials.length);
+    };
+
     return (
         <Section id="testimonials" className="bg-white">
             <Head
                 eyebrow="Provider feedback"
                 title="Practice providers’ feedback, state by state"
             >
-                Physicians, therapists and other practice providers share their
-                experiences. Select a state to view sample feedback.
+                Explore sample feedback from different specialties and states.
+                Select a state to view its testimonials.
             </Head>
 
             <div className="flex flex-wrap gap-2">
-                {states.map((state) => (
-                    <button
-                        key={state}
-                        type="button"
-                        onClick={() => {
-                            setSelectedState(state);
-                            setActiveIndex(0);
-                        }}
-                        className={`rounded-full border px-3.5 py-2 text-sm font-medium transition ${
-                            selectedState === state
-                                ? "border-brand bg-brand text-white"
-                                : "border-line bg-white text-navy hover:border-brand/40 hover:bg-canvas"
-                        }`}
-                    >
-                        {state}
-                    </button>
-                ))}
+                {states.map((state) => {
+                    const count = testimonials.filter(
+                        (t) => t.state === state,
+                    ).length;
+
+                    return (
+                        <button
+                            key={state}
+                            type="button"
+                            aria-pressed={selectedState === state}
+                            onClick={() => {
+                                setSelectedState(state);
+                                setActiveIndex(0);
+                            }}
+                            className={`rounded-full border px-3.5 py-2 text-sm font-medium transition ${
+                                selectedState === state
+                                    ? "border-brand bg-brand text-white"
+                                    : "border-line bg-white text-navy hover:border-brand/40 hover:bg-canvas"
+                            }`}
+                        >
+                            {state}
+                            <span className="ml-1.5 text-xs opacity-75">
+                                ({count})
+                            </span>
+                        </button>
+                    );
+                })}
             </div>
 
             {activeTestimonial ? (
@@ -364,12 +386,7 @@ export function Testimonials() {
                         type="button"
                         aria-label="Previous testimonial"
                         disabled={stateTestimonials.length < 2}
-                        onClick={() =>
-                            setActiveIndex(
-                                (activeIndex - 1 + stateTestimonials.length) %
-                                    stateTestimonials.length,
-                            )
-                        }
+                        onClick={goToPrevious}
                         className="hidden size-11 shrink-0 place-items-center rounded-full border border-line bg-white text-brand disabled:opacity-40 sm:grid"
                     >
                         <span aria-hidden="true">‹</span>
@@ -384,12 +401,23 @@ export function Testimonials() {
                         <div className="mt-2 flex flex-wrap items-center gap-3">
                             <div
                                 className="flex gap-0.5 text-[#E8A23A]"
-                                aria-label="5 out of 5 stars — sample rating"
+                                role="img"
+                                aria-label={`${activeTestimonial.rating} out of 5 stars — sample rating`}
                             >
-                                {"★★★★★".split("").map((star, i) => (
-                                    <span key={i}>{star}</span>
+                                {Array.from({ length: 5 }, (_, i) => (
+                                    <span key={i}>
+                                        {i <
+                                        Math.round(activeTestimonial.rating)
+                                            ? "★"
+                                            : "☆"}
+                                    </span>
                                 ))}
                             </div>
+
+                            <span className="text-sm font-semibold text-[#245C7A]">
+                                {activeTestimonial.rating.toFixed(1)} / 5
+                            </span>
+
                             <span className="text-sm font-bold text-[#245C7A]">
                                 {activeTestimonial.headline ??
                                     "Sample provider feedback"}
@@ -397,26 +425,32 @@ export function Testimonials() {
                         </div>
 
                         <blockquote className="mt-5 text-base leading-7 text-navy sm:text-lg">
-                            {activeTestimonial.quote}
+                            “{activeTestimonial.quote}”
                         </blockquote>
 
                         <div className="mt-5 inline-flex rounded-full bg-[#E5F5EA] px-3.5 py-2 text-xs font-medium text-brand">
-                            ▲{" "}
+                            <span aria-hidden="true" className="mr-1.5">
+                                ▲
+                            </span>
                             {activeTestimonial.outcome ??
                                 "Illustrative workflow benefit"}
                         </div>
 
                         <div className="mt-5 flex items-center gap-3">
-                            <div className="grid size-12 shrink-0 place-items-center rounded-full bg-brand text-sm font-bold text-white">
+                            <div
+                                aria-hidden="true"
+                                className="grid size-12 shrink-0 place-items-center rounded-full bg-brand text-sm font-bold text-white"
+                            >
                                 {activeTestimonial.initials ??
-                                    selectedState
+                                    activeTestimonial.name
                                         .split(" ")
+                                        .filter((word) => /^[A-Z]/.test(word))
+                                        .slice(0, 2)
                                         .map((word) => word[0])
-                                        .join("")
-                                        .slice(0, 2)}
+                                        .join("")}
                             </div>
 
-                            <div>
+                            <div className="min-w-0">
                                 <p className="font-semibold text-navy">
                                     {activeTestimonial.name}
                                 </p>
@@ -430,38 +464,28 @@ export function Testimonials() {
                             </div>
                         </div>
 
-                        <p className="mt-4 inline-block rounded-md border border-dashed border-[#E5C879] bg-[#FFF8E3] px-2.5 py-1.5 text-[11px] text-[#82621D]">
-                            Sample testimonial. Replace with verified client
-                            feedback before publishing.
-                        </p>
-
-                        <div className="mt-5 flex items-center justify-between sm:hidden">
+                        <div className="mt-5 flex items-center justify-between gap-3">
                             <button
                                 type="button"
                                 disabled={stateTestimonials.length < 2}
-                                onClick={() =>
-                                    setActiveIndex(
-                                        (activeIndex -
-                                            1 +
-                                            stateTestimonials.length) %
-                                            stateTestimonials.length,
-                                    )
-                                }
-                                className="rounded-full border border-line px-4 py-2 disabled:opacity-40"
+                                onClick={goToPrevious}
+                                className="rounded-full border border-line px-4 py-2 text-sm disabled:opacity-40"
                             >
                                 Previous
                             </button>
 
+                            <span
+                                className="text-sm text-muted"
+                                aria-live="polite"
+                            >
+                                {activeIndex + 1} of {stateTestimonials.length}
+                            </span>
+
                             <button
                                 type="button"
                                 disabled={stateTestimonials.length < 2}
-                                onClick={() =>
-                                    setActiveIndex(
-                                        (activeIndex + 1) %
-                                            stateTestimonials.length,
-                                    )
-                                }
-                                className="rounded-full border border-line px-4 py-2 disabled:opacity-40"
+                                onClick={goToNext}
+                                className="rounded-full border border-line px-4 py-2 text-sm disabled:opacity-40"
                             >
                                 Next
                             </button>
@@ -472,11 +496,7 @@ export function Testimonials() {
                         type="button"
                         aria-label="Next testimonial"
                         disabled={stateTestimonials.length < 2}
-                        onClick={() =>
-                            setActiveIndex(
-                                (activeIndex + 1) % stateTestimonials.length,
-                            )
-                        }
+                        onClick={goToNext}
                         className="hidden size-11 shrink-0 place-items-center rounded-full border border-line bg-white text-brand disabled:opacity-40 sm:grid"
                     >
                         <span aria-hidden="true">›</span>
