@@ -168,7 +168,7 @@ export function AiSection() {
                                     style={{
                                         transitionDelay: `${index * 90}ms`,
                                     }}
-                                    className={`ai-reveal ai-capability-card ai-reveal-delay-${index} group h-full rounded-2xl border border-white/10 bg-white/[0.045] p-5 transition duration-300 hover:-translate-y-1 hover:border-mint/35 hover:bg-white/[0.07]`}
+                                    className={`ai-reveal ai-capability-card ai-reveal-delay-${index} group h-full rounded-2xl border border-white/10 bg-white/4.5 p-5 transition duration-300 hover:-translate-y-1 hover:border-mint/35 hover:bg-white/[0.07]`}
                                 >
                                     <div className="ai-capability-icon mb-4 flex size-10 items-center justify-center rounded-xl border border-mint/15 bg-mint/10 text-mint transition duration-300 group-hover:bg-mint/15">
                                         <Icon
@@ -190,7 +190,7 @@ export function AiSection() {
                     </ul>
 
                     {/* Interactive workflow simulation */}
-                    <div className="ai-reveal ai-reveal-delay-2 ai-simulation-shell relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.09] via-white/[0.055] to-white/[0.025] p-4 shadow-[0_24px_70px_-38px_rgba(0,0,0,0.7)] sm:p-6">
+                    <div className="ai-reveal ai-reveal-delay-2 ai-simulation-shell relative overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-white/9 via-white/5.5 to-white/2.5 p-4 shadow-[0_24px_70px_-38px_rgba(0,0,0,0.7)] sm:p-6">
                         {/* Animated ambient glows */}
                         <div
                             aria-hidden="true"
@@ -256,7 +256,7 @@ export function AiSection() {
                                     aria-valuenow={Math.round(progress)}
                                 >
                                     <div
-                                        className="ai-progress-fill relative h-full rounded-full bg-gradient-to-r from-brand to-mint transition-[width] duration-500 ease-out motion-reduce:transition-none"
+                                        className="ai-progress-fill relative h-full rounded-full bg-linear-to-r from-brand to-mint transition-[width] duration-500 ease-out motion-reduce:transition-none"
                                         style={{ width: `${progress}%` }}
                                     />
                                 </div>
@@ -292,10 +292,10 @@ export function AiSection() {
                                                     : ""
                                             } ${
                                                 isCurrent
-                                                    ? "border-mint/60 bg-mint/[0.085] shadow-[inset_0_0_0_1px_rgba(39,194,174,0.06)]"
+                                                    ? "border-mint/60 bg-mint/8.5 shadow-[inset_0_0_0_1px_rgba(39,194,174,0.06)]"
                                                     : isComplete
-                                                      ? "border-white/10 bg-white/[0.045]"
-                                                      : "border-white/[0.06] bg-white/[0.02] opacity-60"
+                                                      ? "border-white/10 bg-white/4.5"
+                                                      : "border-white/6 bg-white/2 opacity-60"
                                             }`}
                                         >
                                             <div className="flex items-start gap-3">
@@ -353,7 +353,7 @@ export function AiSection() {
 
                                                     {isVisible &&
                                                         stage.flag && (
-                                                            <p className="ai-stage-flag mt-2 inline-flex max-w-full items-start gap-1.5 rounded-lg border border-amber-300/15 bg-amber-300/[0.08] px-2.5 py-1.5 text-xs font-medium leading-relaxed text-amber-100">
+                                                            <p className="ai-stage-flag mt-2 inline-flex max-w-full items-start gap-1.5 rounded-lg border border-amber-300/15 bg-amber-300/8 px-2.5 py-1.5 text-xs font-medium leading-relaxed text-amber-100">
                                                                 <AlertTriangle
                                                                     className="mt-0.5 size-3.5 shrink-0"
                                                                     aria-hidden="true"
@@ -374,7 +374,7 @@ export function AiSection() {
                                     type="button"
                                     onClick={startSimulation}
                                     disabled={isRunning}
-                                    className="ai-primary-button inline-flex cursor-pointer min-h-11 items-center justify-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-semibold text-white shadow-[0_8px_24px_-12px_rgba(47,107,255,0.8)] transition duration-200 hover:bg-brand-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint disabled:cursor-not-allowed disabled:opacity-60"
+                                    className="ai-primary-button inline-flex cursor-pointer min-h-11 items-center justify-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-semibold text-white shadow-[0_8px_24px_-12px_rgba(47,107,255,0.8)] transition duration-200 hover:bg-brand-hover focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-mint disabled:cursor-not-allowed disabled:opacity-60"
                                 >
                                     {isRunning ? (
                                         <Clock
@@ -399,7 +399,7 @@ export function AiSection() {
                                     <button
                                         type="button"
                                         onClick={resetSimulation}
-                                        className="ai-secondary-button inline-flex cursor-pointer min-h-11 items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.035] px-4 py-2.5 text-sm font-semibold text-slate-100 transition duration-200 hover:border-white/30 hover:bg-white/[0.08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint"
+                                        className="ai-secondary-button inline-flex cursor-pointer min-h-11 items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.035] px-4 py-2.5 text-sm font-semibold text-slate-100 transition duration-200 hover:border-white/30 hover:bg-white/8 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-mint"
                                     >
                                         <RotateCcw
                                             className="size-4"

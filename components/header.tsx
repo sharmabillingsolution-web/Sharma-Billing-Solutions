@@ -156,7 +156,7 @@ export function Header() {
                                     style={{
                                         animationDelay: `${index * 55}ms`,
                                     }}
-                                    className="mobile-nav-link flex min-h-12 items-center justify-between gap-3 rounded-xl px-3 py-3 text-sm font-medium text-muted transition-colors hover:bg-brand/5 hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-brand motion-reduce:transition-none"
+                                    className="mobile-nav-link flex min-h-12 items-center justify-between gap-3 rounded-xl px-3 py-3 text-sm font-medium text-muted transition-colors hover:bg-brand/5 hover:text-brand focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand motion-reduce:transition-none"
                                 >
                                     <span>{item.label}</span>
                                     <ArrowRight

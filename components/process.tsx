@@ -165,13 +165,13 @@ export function Process() {
                                                     ? "0ms"
                                                     : undefined,
                                             }}
-                                            className={`process-reveal process-step-button group relative flex min-h-[88px] w-full cursor-pointer items-center gap-3 overflow-hidden rounded-2xl border p-4 text-left transition duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand motion-reduce:transition-none ${
+                                            className={`process-reveal process-step-button group relative flex min-h-22 w-full cursor-pointer items-center gap-3 overflow-hidden rounded-2xl border p-4 text-left transition duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand motion-reduce:transition-none ${
                                                 visibleSteps.has(index)
                                                     ? "is-visible"
                                                     : ""
                                             } ${
                                                 isActive
-                                                    ? "is-active border-brand bg-brand/[0.045] shadow-[0_4px_18px_rgb(47_107_255/8%)]"
+                                                    ? "is-active border-brand bg-brand/4.5 shadow-[0_4px_18px_rgb(47_107_255/8%)]"
                                                     : "border-line bg-white hover:-translate-y-0.5 hover:border-brand/30 hover:bg-canvas/70 hover:shadow-soft"
                                             }`}
                                         >
@@ -247,7 +247,7 @@ export function Process() {
                         {/* Decorative header */}
                         <div
                             aria-hidden="true"
-                            className="process-detail-glow absolute inset-x-0 top-0 h-32 bg-gradient-to-br from-brand/[0.09] via-aqua/50 to-transparent"
+                            className="process-detail-glow absolute inset-x-0 top-0 h-32 bg-linear-to-br from-brand/9 via-aqua/50 to-transparent"
                         />
 
                         <div className="relative p-5 sm:p-7">
@@ -288,7 +288,7 @@ export function Process() {
                                     aria-valuetext={`Step ${safeActiveStep + 1} of ${processSteps.length} selected`}
                                 >
                                     <div
-                                        className="process-progress-fill relative h-full rounded-full bg-gradient-to-r from-brand to-mint transition-[width] duration-500 ease-out motion-reduce:transition-none"
+                                        className="process-progress-fill relative h-full rounded-full bg-linear-to-r from-brand to-mint transition-[width] duration-500 ease-out motion-reduce:transition-none"
                                         style={{ width: `${progress}%` }}
                                     />
                                 </div>

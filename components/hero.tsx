@@ -34,18 +34,18 @@ export function Hero() {
             {/* Animated dot-grid background */}
             <div
                 aria-hidden="true"
-                className="gridbg pointer-events-none absolute inset-0 z-0 opacity-50 [mask-image:radial-gradient(ellipse_70%_65%_at_60%_30%,#000,transparent)]"
+                className="gridbg pointer-events-none absolute inset-0 z-0 opacity-50 mask-[radial-gradient(ellipse_70%_65%_at_60%_30%,#000,transparent)]"
             />
 
             {/* Ambient color orbs */}
             <div
                 aria-hidden="true"
-                className="hero-orb pointer-events-none absolute -right-40 top-0 z-0 size-[28rem] rounded-full bg-mint/20 blur-3xl sm:size-[34rem]"
+                className="hero-orb pointer-events-none absolute -right-40 top-0 z-0 size-112 rounded-full bg-mint/20 blur-3xl sm:size-136"
             />
 
             <div
                 aria-hidden="true"
-                className="hero-orb-delayed pointer-events-none absolute -left-40 top-48 z-0 size-[24rem] rounded-full bg-brand/10 blur-3xl"
+                className="hero-orb-delayed pointer-events-none absolute -left-40 top-48 z-0 size-96 rounded-full bg-brand/10 blur-3xl"
             />
 
             {/* Main layout */}
@@ -131,7 +131,7 @@ export function Hero() {
                 <figure
                     aria-labelledby="workflow-title"
                     aria-describedby="workflow-disclaimer"
-                    className="hero-enter-right hero-delay-3 relative mx-auto w-full max-w-[36rem] lg:max-w-none"
+                    className="hero-enter-right hero-delay-3 relative mx-auto w-full max-w-xl lg:max-w-none"
                 >
                     {/* Main dashboard card */}
                     <div className="hero-dashboard surface-card relative z-10 rounded-panel p-4 shadow-float sm:p-5">

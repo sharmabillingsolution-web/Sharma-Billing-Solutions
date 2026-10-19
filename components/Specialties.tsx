@@ -455,7 +455,7 @@ export function Specialties() {
 
             <Card className="specialty-card mt-5 overflow-hidden border-line bg-white p-4 sm:p-6">
                 <div className="grid gap-5 sm:grid-cols-[220px_1fr] sm:gap-6">
-                    <div className="relative flex min-h-44 items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-aqua/70 to-brand/10">
+                    <div className="relative flex min-h-44 items-center justify-center overflow-hidden rounded-2xl bg-linear-to-br from-aqua/70 to-brand/10">
                         <div className="grid size-20 place-items-center rounded-full border border-white/80 bg-white/80 text-brand shadow-sm">
                             <SelectedIcon
                                 className="size-10"

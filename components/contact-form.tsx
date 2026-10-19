@@ -455,7 +455,7 @@ export function ContactForm() {
                 {/* Honeypot field for basic spam detection */}
                 <div
                     aria-hidden="true"
-                    className="contact-form-honeypot absolute -left-[9999px] h-0 w-0 overflow-hidden"
+                    className="contact-form-honeypot absolute left-[-9999px] h-0 w-0 overflow-hidden"
                 >
                     <label htmlFor="website">
                         Website
@@ -487,7 +487,7 @@ export function ContactForm() {
                                 }
                                 onChange={() => clearError("consent")}
                                 disabled={status === "submitting"}
-                                className="mt-0.5 size-5 shrink-0 cursor-pointer rounded border-line accent-brand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                                className="mt-0.5 size-5 shrink-0 cursor-pointer rounded border-line accent-brand focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-brand"
                             />
 
                             <span className="text-sm leading-6 text-muted">

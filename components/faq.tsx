@@ -53,9 +53,9 @@ export function Faq() {
                                                         : index,
                                                 )
                                             }
-                                            className={`faq-question group flex min-h-[76px] w-full cursor-pointer items-center justify-between gap-4 px-5 py-5 text-left transition-colors duration-200 focus-visible:relative focus-visible:z-10 sm:px-6 ${
+                                            className={`faq-question group flex min-h-19 w-full cursor-pointer items-center justify-between gap-4 px-5 py-5 text-left transition-colors duration-200 focus-visible:relative focus-visible:z-10 sm:px-6 ${
                                                 isOpen
-                                                    ? "is-open bg-brand/[0.04]"
+                                                    ? "is-open bg-brand/4"
                                                     : "bg-white hover:bg-canvas/80"
                                             }`}
                                         >

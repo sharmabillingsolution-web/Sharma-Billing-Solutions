@@ -104,7 +104,7 @@ export function Care() {
                         </p>
                         <ol
                             aria-label="Encounter-to-claim workflow"
-                            className="relative space-y-6 before:absolute before:left-[15px] before:top-2 before:h-[calc(100%-1rem)] before:w-px before:bg-line"
+                            className="relative space-y-6 before:absolute before:left-3.75 before:top-2 before:h-[calc(100%-1rem)] before:w-px before:bg-line"
                         >
                             {flow.map((f, i) => (
                                 <li
@@ -264,7 +264,7 @@ export function Coverage() {
                             </span>
 
                             <span className="inline-flex items-center gap-2">
-                                <span className="size-3 rounded-sm border border-[#B8C6D6] bg-[#F0F5FA]" />
+                                <span className="size-3 rounded-sm border border-[#B8C6D6] bg-surface-soft" />
                                 Other states
                             </span>
                         </div>
@@ -675,7 +675,7 @@ export function ContactInfo() {
                         aria-hidden="true"
                     />
                     <a
-                        className="break-words underline-offset-4 transition-colors hover:text-white hover:underline"
+                        className="wrap-break-word underline-offset-4 transition-colors hover:text-white hover:underline"
                         href={`mailto:${SITE.email}`}
                     >
                         {SITE.email}
