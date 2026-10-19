@@ -229,7 +229,7 @@ export function AiSection() {
                                         aria-hidden="true"
                                         className="ai-demo-dot size-1.5 rounded-full bg-amber-300"
                                     />
-                                    Simulated demo
+                                    Simulated workflow
                                 </span>
                             </div>
 
@@ -441,25 +441,7 @@ export function AiSection() {
                 {/* Sample metrics */}
                 {SITE.flags.DEMO_DATA && (
                     <div className="ai-reveal ai-metrics-panel mt-8 rounded-2xl border border-amber-300/25 bg-white/[0.035] p-5 sm:p-6">
-                        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                            <div>
-                                <h3 className="font-semibold text-white">
-                                    Illustrative sample metrics
-                                </h3>
-
-                                <p className="mt-1 text-sm text-slate-300">
-                                    These values are examples for layout preview
-                                    and must not be presented as actual client
-                                    results.
-                                </p>
-                            </div>
-
-                            <DemoBadge>
-                                Sample data — not actual client performance
-                            </DemoBadge>
-                        </div>
-
-                        <dl className="mt-5 grid gap-4 border-t border-white/10 pt-5 sm:grid-cols-3 sm:gap-6">
+                        <dl className="mt-5 grid gap-4 border-white/10 sm:grid-cols-3 sm:gap-6">
                             {demo.stats.map((stat, index) => (
                                 <div
                                     key={stat.label}

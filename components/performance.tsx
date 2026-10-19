@@ -161,32 +161,6 @@ export function Performance() {
             </Head>
 
             <div className="space-y-7">
-                <div className="relative overflow-hidden rounded-2xl border border-amber-200 bg-amber-50/70 p-5 sm:p-6">
-                    <div className="flex items-start gap-3">
-                        <div className="grid size-10 shrink-0 place-items-center rounded-xl border border-amber-200 bg-white text-amber-700">
-                            <ShieldCheck
-                                className="size-5"
-                                aria-hidden="true"
-                            />
-                        </div>
-                        <div className="min-w-0">
-                            <div className="flex flex-wrap items-center gap-2">
-                                <h3 className="text-sm font-semibold text-navy">
-                                    Claims workbook reporting preview
-                                </h3>
-                                <DemoBadge />
-                            </div>
-                            <p className="mt-2 max-w-3xl text-sm leading-6 text-amber-950/80">
-                                Figures are calculated from the supplied
-                                workbook (1,500 claims). Verify the data,
-                                reporting period, definitions, and permission to
-                                publish before presenting these figures as
-                                client results.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
                 <div className="flex flex-col gap-4 rounded-2xl border border-line bg-canvas/70 p-4 sm:p-5 lg:flex-row lg:items-center lg:justify-between">
                     <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
                         <label
@@ -230,14 +204,6 @@ export function Performance() {
                         />
                     </a>
                 </div>
-
-                <p className="-mt-4 text-xs leading-5 text-muted">
-                    {selectedSpecialty === "All Specialties"
-                        ? "Showing totals across all specialties in the workbook."
-                        : `Showing workbook metrics for ${selectedSpecialty}.`}{" "}
-                    The workbook has no service-date field, so a dated monthly
-                    trend cannot be calculated from the supplied source.
-                </p>
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
                     {kpis.map((kpi, index) => {

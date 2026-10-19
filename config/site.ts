@@ -47,12 +47,12 @@ export const SITE = {
         {
             value: "15+",
             unit: "specialties",
-            label: "Specialty experience (names to be confirmed)",
+            label: "Specialty experience in Internal Medicine and related fields",
         },
         {
             value: "14",
             unit: "states",
-            label: "Geographic experience (states to be confirmed)",
+            label: "Geographic experience across the United States",
         },
         {
             value: "Human",

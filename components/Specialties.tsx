@@ -251,7 +251,7 @@ const specialties: Specialty[] = [
         ],
     },
     {
-        name: "Obstetrics & Gynecology",
+        name: "OBGYN",
         description:
             "OB/GYN workflows may include preventive visits, problem-oriented visits, and pregnancy-related care.",
         icon: BriefcaseMedical,
@@ -376,23 +376,25 @@ const fallbackSpecialty = (name: string): Specialty => ({
 export function Specialties() {
     const [selectedName, setSelectedName] = useState("Internal Medicine");
 
-    // Keep the specialty pills in the same order as the reference design.
+    // Show only the 15 specialties listed in the client's workbook.
+    // Preserve existing CPT examples where they already exist; the workbook itself
+    // does not provide CPT data, so these remain illustrative website examples.
     const specialtyDisplayOrder = [
-        "Internal Medicine",
-        "Family Medicine",
         "Anesthesiology",
-        "Radiology",
-        "Pain Management",
-        "Physical Therapy",
-        "Chiropractic",
-        "Orthopedics",
-        "Podiatry",
-        "Pediatrics",
-        "Gastroenterology",
+        "Cardiology",
         "Dermatology",
-        "Wound Care",
-        "Psychology",
-        "Behavioral Health",
+        "Emergency Medicine",
+        "Family Medicine",
+        "Gastroenterology",
+        "General Surgery",
+        "Internal Medicine",
+        "Neurology",
+        "OBGYN",
+        "Ophthalmology",
+        "Orthopedics",
+        "Pediatrics",
+        "Psychiatry",
+        "Radiology",
     ];
 
     const allAvailableSpecialties = [
@@ -419,9 +421,9 @@ export function Specialties() {
                 eyebrow="Specialties"
                 title="Specialty-focused billing support."
             >
-                Explore the specialties below to preview common billing
-                workflows and example CPT focus areas. Internal Medicine is
-                highlighted as the primary specialty.
+                Explore the 15 specialties listed in the client-provided
+                workbook. CPT examples are illustrative and should be verified
+                against the services performed, documentation, and payer rules.
             </Head>
 
             <div className="mt-8 flex flex-wrap gap-2">

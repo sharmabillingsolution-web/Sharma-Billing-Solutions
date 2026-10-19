@@ -21,6 +21,7 @@ import {
 } from "@/data/content";
 import { useState } from "react";
 import { statesWorked } from "@/data/content";
+import usa from "@svg-maps/usa";
 
 export function Metrics() {
     const [selectedState, setSelectedState] = useState("New Jersey");
@@ -163,6 +164,36 @@ export function Services() {
     );
 }
 
+const coveredStateIds = new Set([
+    "ca", // California
+    "nj", // New Jersey
+    "va", // Virginia
+    "nc", // North Carolina
+    "sc", // South Carolina
+    "il", // Illinois
+    "ct", // Connecticut
+    "tx", // Texas
+    "mo", // Missouri
+    "mi", // Michigan
+    "ne", // Nebraska (Omaha)
+    "az", // Arizona
+    "al", // Alabama
+    "hi", // Hawaii
+]);
+
+type USMapLocation = {
+    id: string;
+    name: string;
+    path: string;
+};
+
+type USMapData = {
+    viewBox: string;
+    locations: USMapLocation[];
+};
+
+const usaMap = usa as USMapData;
+
 export function Coverage() {
     const stateMetric = SITE.metrics[2];
 
@@ -175,7 +206,8 @@ export function Coverage() {
                         title="Experience across major payor types."
                     >
                         We support workflows across the payor categories below.
-                        State coverage will be confirmed before publication.
+                        Highlighted states represent the listed coverage
+                        locations.
                     </Head>
 
                     <ul className="flex flex-wrap gap-2">
@@ -194,25 +226,53 @@ export function Coverage() {
                 <Reveal>
                     <figure className="coverage-figure rounded-2xl border border-line bg-white p-5 shadow-soft sm:p-6">
                         <svg
-                            viewBox="0 0 290 180"
-                            className="mx-auto w-full max-w-sm"
+                            viewBox={usaMap.viewBox}
+                            className="mx-auto w-full max-w-lg"
                             role="img"
-                            aria-label="Illustrative outline of the United States"
+                            aria-label="Map of the United States with covered states highlighted"
                         >
-                            <path
-                                d="M20 20 L140 20 L150 28 L175 22 L195 30 L215 20 L240 28 L252 15 L262 40 L250 70 L262 100 L250 130 L238 160 L225 150 L215 130 L200 150 L180 165 L150 150 L120 150 L100 165 L85 140 L55 130 L35 100 L20 60Z"
-                                fill="#F0F5FA"
-                                stroke="#B8C6D6"
-                                strokeWidth="2"
-                                strokeLinejoin="round"
-                                className="coverage-map-path"
-                            />
+                            {usaMap.locations.map((location) => {
+                                const stateId = location.id.toLowerCase();
+                                const isCovered = coveredStateIds.has(stateId);
+
+                                return (
+                                    <path
+                                        key={location.id}
+                                        d={location.path}
+                                        fill={isCovered ? "#162660" : "#F0F5FA"}
+                                        stroke="#FFFFFF"
+                                        strokeWidth="1.5"
+                                        strokeLinejoin="round"
+                                        className="transition-opacity duration-200 hover:opacity-75"
+                                    >
+                                        <title>
+                                            {location.name}
+                                            {isCovered
+                                                ? " — Coverage area"
+                                                : ""}
+                                            {stateId === "ne" ? " (Omaha)" : ""}
+                                        </title>
+                                    </path>
+                                );
+                            })}
                         </svg>
+
+                        <div className="mt-4 flex flex-wrap justify-center gap-4 text-xs text-muted">
+                            <span className="inline-flex items-center gap-2">
+                                <span className="size-3 rounded-sm bg-[#162660]" />
+                                Covered states
+                            </span>
+
+                            <span className="inline-flex items-center gap-2">
+                                <span className="size-3 rounded-sm border border-[#B8C6D6] bg-[#F0F5FA]" />
+                                Other states
+                            </span>
+                        </div>
 
                         <figcaption className="mt-3 text-center text-sm text-muted">
                             {stateMetric
                                 ? `${stateMetric.value}-state footprint`
-                                : "Coverage footprint"}
+                                : `${coveredStateIds.size}-state footprint`}
                         </figcaption>
 
                         <div className="mt-6 border-t border-line pt-5">

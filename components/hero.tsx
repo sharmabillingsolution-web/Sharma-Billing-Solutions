@@ -230,17 +230,13 @@ export function Hero() {
                             <div className="mb-4 flex items-center justify-between gap-3">
                                 <div>
                                     <h3 className="text-sm font-semibold">
-                                        Sample A/R trend
+                                        A/R trend
                                     </h3>
 
                                     <p className="mt-1 text-xs text-muted">
-                                        Conceptual visualization
+                                        Visualization
                                     </p>
                                 </div>
-
-                                <span className="rounded-full bg-aqua px-2.5 py-1 text-[10px] font-semibold text-navy sm:text-[11px]">
-                                    Sample data
-                                </span>
                             </div>
 
                             <svg
@@ -309,8 +305,7 @@ export function Hero() {
                             id="workflow-disclaimer"
                             className="mt-4 text-center text-[10px] leading-5 text-muted sm:text-xs"
                         >
-                            Conceptual interface preview. Not a live platform,
-                            patient record, or actual client data.
+                            Illustrative workflow stages and A/R trend line.
                         </figcaption>
                     </div>
 
